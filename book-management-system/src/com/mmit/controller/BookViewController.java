@@ -1,42 +1,67 @@
 package com.mmit.controller;
 
 import java.io.IOException;
+import java.net.URL;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.ResourceBundle;
 
 import com.mmit.Start;
+import com.mmit.model.entity.Book;
+import com.mmit.model.entity.DatabaseHandler;
 
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
-public class BookViewController {
+public class BookViewController implements Initializable{
 
 	@FXML
-    private TableColumn<?, ?> col_author;
+    private TableColumn<Book, String> col_author;
 
     @FXML
-    private TableColumn<?, ?> col_category;
+    private TableColumn<Book, String> col_category;
 
     @FXML
-    private TableColumn<?, ?> col_code;
+    private TableColumn<Book, Integer> col_code;
 
     @FXML
-    private TableColumn<?, ?> col_entry_by;
+    private TableColumn<Book, String> col_entry_by;
 
     @FXML
-    private TableColumn<?, ?> col_price;
+    private TableColumn<Book, Double> col_price;
 
     @FXML
-    private TableColumn<?, ?> col_publish;
+    private TableColumn<Book, LocalDate> col_publish;
 
     @FXML
-    private TableColumn<?, ?> col_title;
+    private TableColumn<Book, String> col_title;
 
     @FXML
-    private TableView<?> tbl_book;
+    private TableView<Book> tbl_book;
 
     @FXML
     void btn_back_click(ActionEvent event) throws IOException {
     	Start.changeScene("view/Book.fxml", "Book");
     }
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		
+		col_code.setCellValueFactory(new PropertyValueFactory<>("code"));
+		col_title.setCellValueFactory(new PropertyValueFactory<>("title"));
+		col_price.setCellValueFactory(new PropertyValueFactory<>("price"));
+		col_publish.setCellValueFactory(new PropertyValueFactory<>("publishDate"));
+		col_author.setCellValueFactory(new PropertyValueFactory<>("authorName"));
+		col_category.setCellValueFactory(new PropertyValueFactory<>("categoryName"));
+		col_entry_by.setCellValueFactory(new PropertyValueFactory<>("entryName"));
+		
+		List<Book> list = DatabaseHandler.findAllBook();
+		
+		tbl_book.setItems(FXCollections.observableArrayList(list));
+	}
 }

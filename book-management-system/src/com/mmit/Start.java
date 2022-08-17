@@ -2,6 +2,8 @@ package com.mmit;
 	
 import java.io.IOException;
 
+import com.mmit.model.entity.User;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
@@ -13,10 +15,12 @@ import javafx.fxml.FXMLLoader;
 public class Start extends Application {
 	
 	static Stage original_stage;
+	public static User login_user;
+	
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("view/Category.fxml"));
+			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("view/Main.fxml"));
 			Scene scene = new Scene(root);
 			
 			primaryStage.setScene(scene);

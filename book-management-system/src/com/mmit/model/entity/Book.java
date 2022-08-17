@@ -38,17 +38,29 @@ public class Book {
 	public Category getCategory() {
 		return category;
 	}
+	
+	public String getCategoryName() {// categoryName
+		return category.getName();
+	}
 	public void setCategory(Category category) {
 		this.category = category;
 	}
 	public Author getAuthor() {
 		return author;
 	}
+	
+	public String getAuthorName() { // authorName
+		return author.getName();
+	}
 	public void setAuthor(Author author) {
 		this.author = author;
 	}
 	public User getCreated_by() {
 		return created_by;
+	}
+	
+	public String getEntryName() { // entryName
+		return created_by.getEmail();
 	}
 	public void setCreated_by(User created_by) {
 		this.created_by = created_by;
